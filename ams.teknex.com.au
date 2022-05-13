@@ -1,0 +1,26 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name  3.110.104.2;
+    root   /var/www/html;
+    index  index.php index.html index.htm;
+    
+    access_log /var/log/nginx/ams.teknex.com.au.access.log;
+    error_log /var/log/nginx/ams.teknex.com.au.error.log;
+
+
+    location / {
+    try_files $uri $uri/ /index.php$is_args$args;
+      }
+
+    location ~ \.php$ {
+         include snippets/fastcgi-php.conf;
+         fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+         include fastcgi_params;
+         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+         fastcgi_intercept_errors on;
+    }
+}
+
+
