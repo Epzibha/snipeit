@@ -8,8 +8,6 @@ server {
     
     access_log /var/log/nginx/ams.teknex.com.au.access.log;
     error_log /var/log/nginx/ams.teknex.com.au.error.log;
-
-
     location / {
     try_files $uri $uri/ /index.php$is_args$args;
       }
